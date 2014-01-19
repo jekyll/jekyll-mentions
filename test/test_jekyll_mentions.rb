@@ -1,0 +1,24 @@
+require 'helper'
+
+class TestJekyllMentions < Test::Unit::TestCase
+
+  def setup
+    @site = Jekyll::Site.new(Jekyll::Configuration::DEFAULTS)
+    @mentions = Jekyll::Mentions.new()
+    @page = Jekyll::Page.new(@site, File.expand_path("../../", __FILE__), "", "README.md")
+    @page.instance_variable_set "@content", "test @test test"
+    @site.pages.push @page
+    @mention = "test <a href=\"https://github.com/test\" class=\"user-mention\">@test</a> test"
+  end
+
+  should "replace @mention with link" do
+    @mentions.mentionify @page
+    assert_equal @mention, @page.content
+  end
+
+  should "replace page content on generate" do
+    @mentions.generate(@site)
+    assert_equal @mention, @site.pages.first.content
+  end
+
+end

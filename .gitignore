@@ -1,0 +1,4 @@
+/vendor/gems
+.bundle
+bin
+/*.gem
