@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-mentions (0.0.1)
+    jekyll-mentions (0.0.2)
       html-pipeline
       jekyll
 

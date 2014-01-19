@@ -21,4 +21,12 @@ class TestJekyllMentions < Test::Unit::TestCase
     assert_equal @mention, @site.pages.first.content
   end
 
+  should "not mangle liquid templating" do
+    page = Jekyll::Page.new(@site, File.expand_path("../../", __FILE__), "", "README.md")
+    page.instance_variable_set "@content", 'test @test test<a href="{{ test }}">test</a>'
+
+    @mentions.mentionify page
+    assert_equal "#{@mention}<a href=\"{{ test }}\">test</a>", page.content
+  end
+
 end

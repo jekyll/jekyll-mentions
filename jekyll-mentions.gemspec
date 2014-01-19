@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = "jekyll-mentions"
   s.summary = "@mentionable support for your Jekyll site"
   s.description = ""
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.authors = ["GitHub, Inc."]
   s.email = "support@github.com"
   s.homepage = "https://github.com/github/jemoji"
