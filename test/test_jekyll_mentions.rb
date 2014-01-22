@@ -4,7 +4,7 @@ class TestJekyllMentions < Test::Unit::TestCase
 
   def setup
     @site = Jekyll::Site.new(Jekyll::Configuration::DEFAULTS)
-    @mentions = Jekyll::Mentions.new()
+    @mentions = Jekyll::Mentions.new(@site)
     @page = Jekyll::Page.new(@site, File.expand_path("../../", __FILE__), "", "README.md")
     @page.instance_variable_set "@content", "test @test test"
     @site.pages.push @page
