@@ -15,6 +15,7 @@ module Jekyll
     end
 
     def mentionify(page)
+      return unless page.content.include?('@')
       filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => URL })
       page.content = filter.mention_link_filter(page.content)
     end
