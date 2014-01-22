@@ -9,7 +9,7 @@ cd $(dirname "$0")/..
 
 # Make sure the darn thing works
 
-bundle update
+bundle install
 
 # Build a new gem archive.
 
