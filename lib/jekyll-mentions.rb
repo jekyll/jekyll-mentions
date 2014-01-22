@@ -4,6 +4,8 @@ require 'html/pipeline'
 module Jekyll
   class Mentions < Jekyll::Generator
 
+    safe true
+
     TAG = "jekyll_mentions"
     URL = "https://github.com"
 
