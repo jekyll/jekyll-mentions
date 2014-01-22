@@ -18,7 +18,7 @@ module Jekyll
     end
 
     def mentionify(page)
-      return page.content unless page.content.include?('@')
+      return unless page.content.include?('@')
       page.content = @filter.mention_link_filter(page.content)
     end
   end

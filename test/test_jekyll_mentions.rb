@@ -37,4 +37,12 @@ class TestJekyllMentions < Test::Unit::TestCase
     assert_equal "#{@mention}\n> test", page.content
   end
 
+  should "not mangle non-mentioned content" do
+    page = Jekyll::Page.new(@site, File.expand_path("../../", __FILE__), "", "README.md")
+    page.instance_variable_set "@content", "test test test\n> test"
+
+    @mentions.mentionify page
+    assert_equal "test test test\n> test", page.content
+  end
+
 end
