@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    jekyll-mentions (0.0.3)
-      html-pipeline
-      jekyll
+    jekyll-mentions (0.0.4)
+      html-pipeline (~> 1.5.0)
+      jekyll (~> 1.4.3)
 
 GEM
   remote: https://rubygems.org/
