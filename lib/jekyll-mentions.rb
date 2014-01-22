@@ -6,7 +6,6 @@ module Jekyll
 
     safe true
 
-    TAG = "jekyll_mentions"
     URL = "https://github.com"
 
     def initialize(site)
