@@ -2,6 +2,8 @@
 
 @mentionable support for your Jekyll site
 
+[![Gem Version](https://badge.fury.io/rb/jekyll-mentions.png)](http://badge.fury.io/rb/jekyll-mentions)
+
 ## Usage
 
 Add the following to your site's `Gemfile`
