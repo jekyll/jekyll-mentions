@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "jekyll-mentions"
-  s.summary = "@mentionable support for your Jekyll site"
+  s.summary = "@mention support for your Jekyll site"
   s.description = ""
   s.version = "0.0.5"
   s.authors = ["GitHub, Inc."]
