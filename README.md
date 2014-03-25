@@ -3,6 +3,7 @@
 @mentionable support for your Jekyll site
 
 [![Gem Version](https://badge.fury.io/rb/jekyll-mentions.png)](http://badge.fury.io/rb/jekyll-mentions)
+[![Build Status](https://travis-ci.org/jekyll/jekyll-mentions.svg?branch=loose)](https://travis-ci.org/jekyll/jekyll-mentions)
 
 ## Usage
 
