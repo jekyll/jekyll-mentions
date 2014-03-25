@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 install:
-- travis_retry bundle install --path vendor/bundle
+- travis_retry script/bootstrap
 rvm:
 - 2.1.0
 - 2.0.0
