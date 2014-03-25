@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/jekyll/jekyll-mentions"
   s.licenses = ["MIT"]
   s.files = [ "lib/jekyll-mentions.rb" ]
-  s.add_dependency( "jekyll", '~> 1.4.3')
+  s.add_dependency( "jekyll", '~> 1.4')
   s.add_dependency( "html-pipeline", '~> 1.5.0' )
 end
