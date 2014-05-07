@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestJekyllMentions < Test::Unit::TestCase
+class TestJekyllMentions < Minitest::Test
 
   def setup
     @site = Jekyll::Site.new(Jekyll::Configuration::DEFAULTS)
