@@ -44,6 +44,7 @@ class TestJekyllMentions < Minitest::Test
   end
 
   should "not touch non-HTML pages" do
+    @mentions.generate(@site)
     assert_equal "test @test test", page_with_name(@site, "test.json").content
   end
 
