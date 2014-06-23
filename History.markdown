@@ -1,6 +1,6 @@
 ## HEAD
 
-### Minor Enhancements
+## 0.1.1 / 2014-06-23
 
   * Only mentionify the page if it's an HTML page (#11)
 
