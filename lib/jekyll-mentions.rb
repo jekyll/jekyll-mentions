@@ -13,7 +13,7 @@ module Jekyll
     end
 
     def generate(site)
-      site.pages.each { |page| mentionify page }
+      site.pages.each { |page| mentionify page if page.html? }
       site.posts.each { |page| mentionify page }
     end
 
