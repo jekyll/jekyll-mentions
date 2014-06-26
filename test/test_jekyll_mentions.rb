@@ -48,4 +48,11 @@ class TestJekyllMentions < Minitest::Test
     assert_equal "test @test test", page_with_name(@site, "test.json").content
   end
 
+  should "also convert pages with permalinks ending in /" do
+    page = page_with_name(@site, "parkr.txt")
+
+    @mentions.mentionify page
+    assert_equal "Parker \"<a href='https://github.com/parkr' class='user-mention'>@parkr</a>\" Moore", page.content
+  end
+
 end
