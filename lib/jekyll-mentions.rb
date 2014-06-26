@@ -23,7 +23,7 @@ module Jekyll
     end
 
     def html_page?(page)
-      page.html? || page.url.ends_with?('/')
+      page.html? || page.url.end_with?('/')
     end
   end
 end
