@@ -1,5 +1,7 @@
 ## HEAD
 
+## 0.1.2 / 2014-07-10
+
   * URLs ending in '/' also indicate and HTML page. (#13)
 
 ## 0.1.1 / 2014-06-23
