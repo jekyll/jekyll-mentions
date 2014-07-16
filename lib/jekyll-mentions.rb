@@ -3,13 +3,12 @@ require 'html/pipeline'
 
 module Jekyll
   class Mentions < Jekyll::Generator
-
     safe true
 
-    URL = "https://github.com"
+    DEFAULT_URL = "https://github.com"
 
-    def initialize(site)
-      @filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => URL })
+    def initialize(config)
+      @filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => base_url(config) })
     end
 
     def generate(site)
@@ -24,6 +23,20 @@ module Jekyll
 
     def html_page?(page)
       page.html? || page.url.end_with?('/')
+    end
+
+    def base_url(config)
+      configs = config['jekyll-mentions']
+      case configs
+      when nil
+        DEFAULT_URL
+      when String
+        configs
+      when Hash
+        configs.fetch('base_url', DEFAULT_URL)
+      else
+        raise ArgumentError.new("Your jekyll-mentions config has to either be a string or a hash! It's a #{configs.class} right now.")
+      end
     end
   end
 end

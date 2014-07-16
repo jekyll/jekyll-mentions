@@ -6,7 +6,7 @@ class TestJekyllMentions < Minitest::Test
   def setup
     @site = fixture_site
     @site.read
-    @mentions = Jekyll::Mentions.new(@site)
+    @mentions = Jekyll::Mentions.new(@site.config)
     @mention = "test <a href='https://github.com/test' class='user-mention'>@test</a> test"
   end
 
