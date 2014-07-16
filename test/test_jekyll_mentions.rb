@@ -55,4 +55,40 @@ class TestJekyllMentions < Minitest::Test
     assert_equal "Parker \"<a href='https://github.com/parkr' class='user-mention'>@parkr</a>\" Moore", page.content
   end
 
+  context "with special base URL specified" do
+    def setup
+      @site = fixture_site
+      @site.read
+      @site.config['jekyll-mentions'] = {"base_url" => "https://twitter.com"}
+      @mentions = Jekyll::Mentions.new(@site.config)
+      @mention = "test <a href='https://twitter.com/test' class='user-mention'>@test</a> test"
+    end
+
+    should "convert when hash setting" do
+      page = page_with_name(@site, "index.md")
+
+      @mentions.mentionify page
+      assert_equal @mention, page.content
+    end
+  end
+
+  context "reading custom base urls" do
+    def setup
+      @mentions = Jekyll::Mentions.new(Hash.new)
+      @base_url = "https://twitter.com"
+    end
+
+    should "read handle a raw string" do
+      assert_equal @base_url, @mentions.base_url(@base_url)
+    end
+
+    should "handle a hash config" do
+      assert_equal @base_url, @mentions.base_url({"base_url" => @base_url})
+    end
+
+    should "default to github.com if not there" do
+      assert_equal @base_url, @mentions.base_url(nil)
+    end
+  end
+
 end

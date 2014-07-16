@@ -7,8 +7,8 @@ module Jekyll
 
     DEFAULT_URL = "https://github.com"
 
-    def initialize(config)
-      @filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => base_url(config) })
+    def initialize(config = Hash.new)
+      @filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => base_url(config['jekyll-mentions']) })
     end
 
     def generate(site)
@@ -25,8 +25,7 @@ module Jekyll
       page.html? || page.url.end_with?('/')
     end
 
-    def base_url(config)
-      configs = config['jekyll-mentions']
+    def base_url(configs)
       case configs
       when nil
         DEFAULT_URL
