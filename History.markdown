@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Allow mention from a different base url than https://github.com (#14)
+
 ## 0.1.2 / 2014-07-10
 
   * URLs ending in '/' also indicate and HTML page. (#13)
