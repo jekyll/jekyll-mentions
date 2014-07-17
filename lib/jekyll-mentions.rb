@@ -27,10 +27,10 @@ module Jekyll
 
     def base_url(configs)
       case configs
-      when nil
+      when nil, NilClass
         DEFAULT_URL
       when String
-        configs
+        configs.to_s
       when Hash
         configs.fetch('base_url', DEFAULT_URL)
       else

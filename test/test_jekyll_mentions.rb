@@ -75,19 +75,18 @@ class TestJekyllMentions < Minitest::Test
   context "reading custom base urls" do
     def setup
       @mentions = Jekyll::Mentions.new(Hash.new)
-      @base_url = "https://twitter.com"
     end
 
-    should "read handle a raw string" do
-      assert_equal @base_url, @mentions.base_url(@base_url)
+    should "handle a raw string" do
+      assert_equal "https://twitter.com", @mentions.base_url("https://twitter.com")
     end
 
     should "handle a hash config" do
-      assert_equal @base_url, @mentions.base_url({"base_url" => @base_url})
+      assert_equal "https://twitter.com", @mentions.base_url({"base_url" => "https://twitter.com"})
     end
 
     should "default to github.com if not there" do
-      assert_equal @base_url, @mentions.base_url(nil)
+      assert_equal "https://github.com", @mentions.base_url(nil)
     end
   end
 
