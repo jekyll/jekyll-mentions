@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "jekyll-mentions"
   s.summary     = "@mention support for your Jekyll site"
-  s.version     = "0.1.2"
+  s.version     = "0.1.3"
   s.authors     = ["GitHub, Inc."]
   s.email       = "support@github.com"
 
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.files       = [ "lib/jekyll-mentions.rb" ]
 
   s.add_dependency "jekyll", '~> 2.0'
-  s.add_dependency "html-pipeline", '~> 1.5.0'
+  s.add_dependency "html-pipeline", '~> 1.9.0'
 
   s.add_development_dependency  'rake'
   s.add_development_dependency  'rdoc'
