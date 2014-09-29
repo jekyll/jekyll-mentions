@@ -45,4 +45,15 @@ If you're lazy like me, you can use this shorthand:
 jekyll-mentions: https://twitter.com
 ```
 
+An example of twitter-mentions using jekyll-mentions: 
+
+```yaml
+gems:
+  - jekyll-sitemap
+  - jekyll-mentions
+
+jekyll-mentions:
+  base_url: https://twitter.com
+```  
+
 Et voilà! Your mentions will now use that base URL instead of the default of `https://github.com`.
