@@ -1,4 +1,4 @@
-## HEAD
+## 0.2.0 / 2014-12-01
 
   * Mentionify collection documents. (#19)
 
