@@ -17,6 +17,13 @@ class TestJekyllMentions < Minitest::Test
     assert_equal @mention, page.content
   end
 
+  should "replace @mention with link in collections" do
+    page = document("file.md")
+
+    @mentions.mentionify page
+    assert_equal @mention, page.content
+  end
+
   should "replace page content on generate" do
     @mentions.generate(@site)
     assert_equal @mention, @site.pages.first.content
