@@ -17,7 +17,10 @@ module MentionsTestHelpers
         Jekyll::Configuration::DEFAULTS,
         {
           "source" => FIXTURES_DIR,
-          "destination" => DEST_DIR
+          "destination" => DEST_DIR,
+          "collections" => {
+            "docs"  => {}
+          }
         }
       )
     )
@@ -25,5 +28,9 @@ module MentionsTestHelpers
 
   def page_with_name(site, name)
     site.pages.find { |p| p.name == name }
+  end
+
+  def document(doc_filename)
+    @site.collections["docs"].docs.find { |d| d.relative_path.match(doc_filename) }
   end
 end
