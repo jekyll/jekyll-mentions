@@ -1,7 +1,10 @@
 ## HEAD
 
-  * Allow mention from a different base url than https://github.com (#14)
   * Mentionify collection documents. (#19)
+
+## 0.1.3 / 2014-07-30
+
+  * Allow mention from a different base url than https://github.com (#14)
 
 ## 0.1.2 / 2014-07-10
 
