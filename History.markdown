@@ -1,3 +1,7 @@
+## 0.2.1 / 2014-12-18
+
+* Fix for undefined variable error (#20)
+
 ## 0.2.0 / 2014-12-01
 
   * Mentionify collection documents. (#19)
