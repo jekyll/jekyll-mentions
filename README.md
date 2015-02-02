@@ -45,11 +45,10 @@ If you're lazy like me, you can use this shorthand:
 jekyll-mentions: https://twitter.com
 ```
 
-An example of twitter-mentions using jekyll-mentions: 
+An example of Twitter mentions using jekyll-mentions: 
 
 ```yaml
 gems:
-  - jekyll-sitemap
   - jekyll-mentions
 
 jekyll-mentions:
