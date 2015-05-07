@@ -11,17 +11,18 @@ FIXTURES_DIR = File.expand_path("fixtures", TEST_DIR)
 DEST_DIR     = File.expand_path("destination", TEST_DIR)
 
 module MentionsTestHelpers
-  def fixture_site
+  def fixture_site(override = {})
     Jekyll::Site.new(
       Jekyll::Utils.deep_merge_hashes(
         Jekyll::Configuration::DEFAULTS,
         {
+          "test_repo" => "some_asinine_value",
           "source" => FIXTURES_DIR,
           "destination" => DEST_DIR,
           "collections" => {
             "docs"  => {}
           }
-        }
+        }.merge(override)
       )
     )
   end
