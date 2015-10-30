@@ -13,13 +13,14 @@ module Jekyll
 
     def generate(site)
       site.pages.each { |page| mentionify page if html_page?(page) }
-      site.posts.each { |post| mentionify post }
+      site.posts.docs.each { |post| mentionify post }
       site.docs_to_write.each { |doc| mentionify doc }
     end
 
     def mentionify(page)
       return unless page.content.include?('@')
-      page.content = @filter.mention_link_filter(page.content)
+      # see https://github.com/jekyll/jekyll-mentions/pull/22 if you're wondering about the nils
+      page.content = @filter.mention_link_filter(page.content, nil, nil, HTML::Pipeline::MentionFilter::UsernamePattern)
     end
 
     def html_page?(page)
