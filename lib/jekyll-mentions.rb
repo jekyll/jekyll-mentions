@@ -20,7 +20,7 @@ module Jekyll
     def mentionify(page)
       return unless page.content.include?('@')
       # see https://github.com/jekyll/jekyll-mentions/pull/22 if you're wondering about the nils
-      page.content = @filter.mention_link_filter(page.content, nil, nil, nil)
+      page.content = @filter.mention_link_filter(page.content, nil, nil, HTML::Pipeline::MentionFilter::UsernamePattern)
     end
 
     def html_page?(page)
