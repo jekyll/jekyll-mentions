@@ -24,9 +24,21 @@ class TestJekyllMentions < Minitest::Test
     assert_equal @mention, page.content
   end
 
-  should "replace page content on generate" do
-    @mentions.generate(@site)
-    assert_equal @mention, @site.pages.first.content
+  context "generating" do
+    should "replace page content on generate" do
+      @mentions.generate(@site)
+      assert_equal @mention, @site.pages.first.content
+    end
+
+    should "replace post content on generate" do
+      @mentions.generate(@site)
+      assert_equal @mention, @site.posts.docs.first.content.strip
+    end
+
+    should "replace doc content on generate" do
+      @mentions.generate(@site)
+      assert_equal @mention, @site.collections["docs"].docs.first.content
+    end
   end
 
   should "not mangle liquid templating" do

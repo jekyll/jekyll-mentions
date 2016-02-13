@@ -19,7 +19,9 @@ module MentionsTestHelpers
           "source" => FIXTURES_DIR,
           "destination" => DEST_DIR,
           "collections" => {
-            "docs"  => {}
+            "docs"  => {
+              "output" => true
+            }
           }
         }
       )
