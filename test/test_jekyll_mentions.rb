@@ -7,7 +7,7 @@ class TestJekyllMentions < Minitest::Test
     @site = fixture_site
     @site.read
     @mentions = Jekyll::Mentions.new(@site.config)
-    @mention = "test <a href='https://github.com/test' class='user-mention'>@test</a> test"
+    @mention = "test <a href='https://github.com/TestUser' class='user-mention'>@TestUser</a> test"
   end
 
   should "replace @mention with link" do
