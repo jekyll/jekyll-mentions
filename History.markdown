@@ -1,6 +1,10 @@
+## HEAD
+
+  * jekyll-mentions as a hook: better guarding against accidents (#27)
+
 ## 0.2.1 / 2014-12-18
 
-* Fix for undefined variable error (#20)
+  * Fix for undefined variable error (#20)
 
 ## 0.2.0 / 2014-12-01
 
