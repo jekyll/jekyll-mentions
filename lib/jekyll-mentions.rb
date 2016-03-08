@@ -2,40 +2,63 @@ require 'jekyll'
 require 'html/pipeline'
 
 module Jekyll
-  class Mentions < Jekyll::Generator
-    safe true
+  class Mentions
+    GITHUB_DOT_COM = "https://github.com".freeze
 
-    DEFAULT_URL = "https://github.com"
+    InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
-    def initialize(config = Hash.new)
-      @filter = HTML::Pipeline::MentionFilter.new(nil, {:base_url => base_url(config['jekyll-mentions']) })
-    end
+    class << self
+      def mentionify(doc)
+        src = mention_base(doc.site.config)
+        doc.output = filter_with_mention(src).call(doc.output)[:output].to_s
+      end
 
-    def generate(site)
-      site.pages.each { |page| mentionify page if html_page?(page) }
-      site.docs_to_write.each { |doc| mentionify doc }
-    end
+      # Public: Create or fetch the filter for the given {{src}} base URL.
+      #
+      # src - the base URL (e.g. https://github.com)
+      #
+      # Returns an HTML::Pipeline instance for the given base URL.
+      def filter_with_mention(src)
+        filters[src] ||= HTML::Pipeline.new([
+          HTML::Pipeline::MentionFilter
+        ], { :base_url => src })
+      end
 
-    def mentionify(page)
-      return unless page.content.include?('@')
-      page.content = @filter.mention_link_filter(page.content)
-    end
+      # Public: Filters hash where the key is the mention base URL.
+      # Effectively a cache.
+      def filters
+        @filters ||= {}
+      end
 
-    def html_page?(page)
-      page.html? || page.url.end_with?('/')
-    end
-
-    def base_url(configs)
-      case configs
-      when nil, NilClass
-        DEFAULT_URL
-      when String
-        configs.to_s
-      when Hash
-        configs.fetch('base_url', DEFAULT_URL)
-      else
-        raise ArgumentError.new("Your jekyll-mentions config has to either be a string or a hash! It's a #{configs.class} right now.")
+      # Public: Calculate the base URL to use for mentioning.
+      # The custom base URL can be defined in the config as
+      # jekyll-mentions.base_url or jekyll-mentions, and must
+      # be a valid URL (i.e. it must include a protocol and valid domain)
+      # It should _not_ have a trailing slash.
+      #
+      # config - the hash-like configuration of the document's site
+      #
+      # Returns a URL to use as the base URL for mentions.
+      # Defaults to the https://github.com.
+      def mention_base(config = {})
+        mention_config = config['jekyll-mentions']
+        case mention_config
+        when nil, NilClass
+          GITHUB_DOT_COM
+        when String
+          mention_config.to_s
+        when Hash
+          mention_config.fetch('base_url', GITHUB_DOT_COM)
+        else
+          raise InvalidJekyllMentionConfig,
+            "Your jekyll-mentions config has to either be a" \
+            " string or a hash. It's a #{mention_config.class} right now."
+        end
       end
     end
   end
+end
+
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::Mentions.mentionify(doc) if doc.class == Jekyll::Page || doc.write?
 end
