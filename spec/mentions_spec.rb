@@ -15,11 +15,16 @@ RSpec.describe(Jekyll::Mentions) do
   let(:mentions)    { described_class }
   let(:default_src) { "https://github.com" }
   let(:site)        { Jekyll::Site.new(configs) }
+  let(:unrendered)  { "test @test test" }
   let(:result)      { "test <a href=\"https://github.com/test\" class=\"user-mention\">@test</a> test" }
 
   let(:posts)        { site.posts.docs.sort.reverse }
-  let(:basic_post)   { posts[1] }
-  let(:complex_post) { posts[0] }
+  let(:basic_post)   { find_by_title(posts, "I'm a post") }
+  let(:complex_post) { find_by_title(posts, "Code Block") }
+
+  let(:basic_doc) { find_by_title(site.collections["docs"].docs, "File") }
+  let(:doc_with_liquid) { find_by_title(site.collections["docs"].docs, "With Liquid") }
+  let(:txt_doc) { find_by_title(site.collections["docs"].docs, "Don't Touch Me") }
 
   def para(content)
     "<p>#{content}</p>\n"
@@ -41,12 +46,10 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "correctly replaces the mentions with the img in posts" do
-    expect(basic_post.title).to eql("I'm a post")
     expect(basic_post.output).to eql(para(result))
   end
 
   it "doesn't replace mentions in a code block" do
-    expect(complex_post.title).to eql("Code Block")
     expect(complex_post.output).to include(
       "<span class=\"s2\">\"test @test test\"</span>"
     )
@@ -58,11 +61,15 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "correctly replaces the mentions with the img in collection documents" do
-    expect(site.collections["docs"].docs.first.output).to eql(para(result))
+    expect(basic_doc.output).to eql(para(result))
+  end
+
+  it "leaves non-HTML files alone" do
+    expect(txt_doc.output).to eql(unrendered)
   end
 
   it "does not mangle liquid templates" do
-    expect(site.collections["docs"].docs.last.output).to eql(
+    expect(doc_with_liquid.output).to eql(
       para("#{result} <a href=\"/docs/with_liquid.html\">_docs/with_liquid.md</a>")
     )
   end

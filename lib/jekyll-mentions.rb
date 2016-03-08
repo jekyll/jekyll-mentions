@@ -55,10 +55,20 @@ module Jekyll
             " string or a hash. It's a #{mention_config.class} right now."
         end
       end
+
+      # Public: Defines the conditions for a document to be emojiable.
+      #
+      # doc - the Jekyll::Document or Jekyll::Page
+      #
+      # Returns true if the doc is written & is HTML.
+      def mentionable?(doc)
+        (doc.class == Jekyll::Page || doc.write?) &&
+          doc.output_ext == ".html" || (doc.permalink && doc.permalink.end_with?("/"))
+      end
     end
   end
 end
 
 Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
-  Jekyll::Mentions.mentionify(doc) if doc.class == Jekyll::Page || doc.write?
+  Jekyll::Mentions.mentionify(doc) if Jekyll::Mentions.mentionable?(doc)
 end
