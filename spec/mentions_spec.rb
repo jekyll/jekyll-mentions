@@ -27,7 +27,7 @@ RSpec.describe(Jekyll::Mentions) do
   let(:txt_doc) { find_by_title(site.collections["docs"].docs, "Don't Touch Me") }
 
   def para(content)
-    "<p>#{content}</p>\n"
+    "<p>#{content}</p>"
   end
 
   before(:each) do
@@ -46,7 +46,7 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "correctly replaces the mentions with the img in posts" do
-    expect(basic_post.output).to eql(para(result))
+    expect(basic_post.output).to start_with(para(result))
   end
 
   it "doesn't replace mentions in a code block" do
@@ -57,19 +57,19 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "correctly replaces the mentions with the img in pages" do
-    expect(site.pages.first.output).to eql(para(result))
+    expect(site.pages.first.output).to start_with(para(result))
   end
 
   it "correctly replaces the mentions with the img in collection documents" do
-    expect(basic_doc.output).to eql(para(result))
+    expect(basic_doc.output).to start_with(para(result))
   end
 
   it "leaves non-HTML files alone" do
-    expect(txt_doc.output).to eql(unrendered)
+    expect(txt_doc.output).to start_with(unrendered)
   end
 
   it "does not mangle liquid templates" do
-    expect(doc_with_liquid.output).to eql(
+    expect(doc_with_liquid.output).to start_with(
       para("#{result} <a href=\"/docs/with_liquid.html\">_docs/with_liquid.md</a>")
     )
   end
@@ -87,7 +87,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "respects the new base when mentionsfying" do
-      expect(basic_post.output).to eql(para(result.sub(default_src, mentions_src)))
+      expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
     end
   end
 end
