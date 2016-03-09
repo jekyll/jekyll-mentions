@@ -1,3 +1,7 @@
+## HEAD
+
+  * Handle subclassing of Jekyll::Page (#28)
+
 ## 1.1.0 / 2016-03-08
 
   * jekyll-mentions as a hook: better guarding against accidents (#27)
