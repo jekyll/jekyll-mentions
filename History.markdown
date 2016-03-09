@@ -2,6 +2,15 @@
 
   * jekyll-mentions as a hook: better guarding against accidents (#27)
 
+## 1.0.1 / 2016-02-16
+
+  * Don't double-mention in Jekyll > 3.0.0 (#25)
+
+## 1.0.0 / 2015-10-30
+
+  * Jekyll 3.x support (#22)
+  * HTML Pipeline 2.2 (#22)
+
 ## 0.2.1 / 2014-12-18
 
   * Fix for undefined variable error (#20)
