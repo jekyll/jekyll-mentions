@@ -56,11 +56,16 @@ RSpec.describe(Jekyll::Mentions) do
     expect(complex_post.output).to include(result)
   end
 
-  it "correctly replaces the mentions with the img in pages" do
-    expect(site.pages.first.output).to start_with(para(result))
+  it "correctly replaces the mentions with the link in pages" do
+    expect(site.pages.first.output).to include(para(result))
   end
 
-  it "correctly replaces the mentions with the img in collection documents" do
+  it "doesn't mangle layouts" do
+    expect(site.pages.first.output).to include("<html lang=\"en-US\">")
+    expect(site.pages.first.output).to include("<body class=\"wrap\">\n")
+  end
+
+  it "correctly replaces the mentions with the link in collection documents" do
     expect(basic_doc.output).to start_with(para(result))
   end
 
