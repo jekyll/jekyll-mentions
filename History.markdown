@@ -1,4 +1,4 @@
-## HEAD
+## 1.1.2 / 2016-03-19
 
   * Don't strip html, body, and head tags (#29)
 
