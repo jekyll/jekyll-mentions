@@ -4,6 +4,8 @@ require 'html/pipeline'
 module Jekyll
   class Mentions
     GITHUB_DOT_COM = "https://github.com".freeze
+    BODY_START_TAG = "<body".freeze
+
 
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
@@ -11,7 +13,7 @@ module Jekyll
       def mentionify(doc)
         return unless doc.output.include?("@")
         src = mention_base(doc.site.config)
-        if doc.output =~ /<\s*body/
+        if doc.output.include? BODY_START_TAG
           parsed_doc    = Nokogiri::HTML::Document.parse(doc.output)
           body          = parsed_doc.at_css('body')
           body.children = filter_with_mention(src).call(body.inner_html)[:output].to_s
