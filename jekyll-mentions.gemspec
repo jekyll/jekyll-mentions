@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "jekyll-mentions"
   s.summary     = "@mention support for your Jekyll site"
-  s.version     = "1.0.1"
+  s.version     = "1.1.2"
   s.authors     = ["GitHub, Inc."]
   s.email       = "support@github.com"
 
@@ -12,8 +12,7 @@ Gem::Specification.new do |s|
   s.add_dependency "jekyll", '~> 3.0'
   s.add_dependency "html-pipeline", '~> 2.3'
 
-  s.add_development_dependency  'rake'
-  s.add_development_dependency  'rdoc'
-  s.add_development_dependency  'shoulda'
-  s.add_development_dependency  'minitest'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'rspec', '~> 3.0'
 end
