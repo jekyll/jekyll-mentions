@@ -3,8 +3,8 @@
 
 ```ruby
 def test_output
-  "test @test test"
+  "test @TestUser test"
 end
 ```
 
-test @test test
+test @TestUser test

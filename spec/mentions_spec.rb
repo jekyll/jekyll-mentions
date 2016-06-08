@@ -15,8 +15,8 @@ RSpec.describe(Jekyll::Mentions) do
   let(:mentions)    { described_class }
   let(:default_src) { "https://github.com" }
   let(:site)        { Jekyll::Site.new(configs) }
-  let(:unrendered)  { "test @test test" }
-  let(:result)      { "test <a href=\"https://github.com/test\" class=\"user-mention\">@test</a> test" }
+  let(:unrendered)  { "test @TestUser test" }
+  let(:result)      { "test <a href=\"https://github.com/TestUser\" class=\"user-mention\">@TestUser</a> test" }
 
   let(:posts)        { site.posts.docs.sort.reverse }
   let(:basic_post)   { find_by_title(posts, "I'm a post") }
@@ -51,7 +51,7 @@ RSpec.describe(Jekyll::Mentions) do
 
   it "doesn't replace mentions in a code block" do
     expect(complex_post.output).to include(
-      "<span class=\"s2\">\"test @test test\"</span>"
+      "<span class=\"s2\">\"test @TestUser test\"</span>"
     )
     expect(complex_post.output).to include(result)
   end
