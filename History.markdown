@@ -1,4 +1,4 @@
-## HEAD
+## 1.1.3 / 2016-06-28
 
   * Allow uppercase chars in username (#33)
 

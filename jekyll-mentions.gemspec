@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "jekyll-mentions"
   s.summary     = "@mention support for your Jekyll site"
-  s.version     = "1.1.2"
+  s.version     = "1.1.3"
   s.authors     = ["GitHub, Inc."]
   s.email       = "support@github.com"
 
