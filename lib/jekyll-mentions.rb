@@ -61,7 +61,7 @@ module Jekyll
         mention_config = config["jekyll-mentions"]
         case mention_config
         when nil, NilClass
-          GITHUB_DOT_COM
+          default_mention_base(config)
         when String
           mention_config.to_s
         when Hash
@@ -81,6 +81,16 @@ module Jekyll
       def mentionable?(doc)
         (doc.is_a?(Jekyll::Page) || doc.write?) &&
           doc.output_ext == ".html" || (doc.permalink && doc.permalink.end_with?("/"))
+      end
+
+      private
+
+      def default_mention_base(config)
+        if config["github"] && config["github"]["mention_url_base"]
+          config["github"]["mention_url_base"]
+        else
+          GITHUB_DOT_COM
+        end
       end
     end
   end

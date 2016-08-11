@@ -95,4 +95,21 @@ RSpec.describe(Jekyll::Mentions) do
       expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
     end
   end
+
+  context "when pulling the base from github metadata" do
+    let(:mentions_src) { "https://example.com" }
+    let(:config_overrides) do
+      {
+        "github" => { "mention_url_base" => mentions_src }
+      }
+    end
+
+    it "fetches the custom base from the config" do
+      expect(mentions.mention_base(site.config)).to eql(mentions_src)
+    end
+
+    it "respects the new base when mentionsfying" do
+      expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
+    end
+  end
 end
