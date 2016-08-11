@@ -1,11 +1,10 @@
-require 'jekyll'
-require 'html/pipeline'
+require "jekyll"
+require "html/pipeline"
 
 module Jekyll
   class Mentions
     GITHUB_DOT_COM = "https://github.com".freeze
     BODY_START_TAG = "<body".freeze
-
 
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
@@ -15,7 +14,7 @@ module Jekyll
         src = mention_base(doc.site.config)
         if doc.output.include? BODY_START_TAG
           parsed_doc    = Nokogiri::HTML::Document.parse(doc.output)
-          body          = parsed_doc.at_css('body')
+          body          = parsed_doc.at_css("body")
           body.children = filter_with_mention(src).call(body.inner_html)[:output].to_s
           doc.output    = parsed_doc.to_html
         else
@@ -31,11 +30,12 @@ module Jekyll
       def filter_with_mention(src)
         filters[src] ||= HTML::Pipeline.new([
           HTML::Pipeline::MentionFilter
-        ], { :base_url => src , :username_pattern => mention_username_pattern })
+        ], { :base_url => src, :username_pattern => mention_username_pattern })
       end
 
       def mention_username_pattern
-        Regexp.new(HTML::Pipeline::MentionFilter::UsernamePattern.source, Regexp::IGNORECASE)
+        Regexp.new(HTML::Pipeline::MentionFilter::UsernamePattern.source,
+        Regexp::IGNORECASE)
       end
 
       # Public: Filters hash where the key is the mention base URL.
@@ -55,14 +55,14 @@ module Jekyll
       # Returns a URL to use as the base URL for mentions.
       # Defaults to the https://github.com.
       def mention_base(config = {})
-        mention_config = config['jekyll-mentions']
+        mention_config = config["jekyll-mentions"]
         case mention_config
         when nil, NilClass
           GITHUB_DOT_COM
         when String
           mention_config.to_s
         when Hash
-          mention_config.fetch('base_url', GITHUB_DOT_COM)
+          mention_config.fetch("base_url", GITHUB_DOT_COM)
         else
           raise InvalidJekyllMentionConfig,
             "Your jekyll-mentions config has to either be a" \

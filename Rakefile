@@ -1,5 +1,5 @@
-require 'rubygems'
-require 'bundler'
+require "rubygems"
+require "bundler"
 begin
   Bundler.setup(:default, :development, :test)
 rescue Bundler::BundlerError => e
@@ -7,12 +7,12 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'bundler/gem_tasks'
-require 'rake'
-require 'rake/testtask'
+require "bundler/gem_tasks"
+require "rake"
+require "rake/testtask"
 
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.libs << "lib" << "test"
+  test.pattern = "test/**/test_*.rb"
   test.verbose = true
 end
