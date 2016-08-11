@@ -34,8 +34,10 @@ module Jekyll
       end
 
       def mention_username_pattern
-        Regexp.new(HTML::Pipeline::MentionFilter::UsernamePattern.source,
-        Regexp::IGNORECASE)
+        Regexp.new(
+          HTML::Pipeline::MentionFilter::UsernamePattern.source,
+          Regexp::IGNORECASE
+        )
       end
 
       # Public: Filters hash where the key is the mention base URL.
