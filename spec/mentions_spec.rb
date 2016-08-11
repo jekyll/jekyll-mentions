@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe(Jekyll::Mentions) do
   Jekyll.logger.log_level = :error
@@ -6,10 +6,10 @@ RSpec.describe(Jekyll::Mentions) do
   let(:config_overrides) { {} }
   let(:configs) do
     Jekyll.configuration(config_overrides.merge({
-      'skip_config_files' => false,
-      'collections'       => { 'docs' => { 'output' => true } },
-      'source'            => fixtures_dir,
-      'destination'       => fixtures_dir('_site')
+      "skip_config_files" => false,
+      "collections"       => { "docs" => { "output" => true } },
+      "source"            => fixtures_dir,
+      "destination"       => fixtures_dir("_site")
     }))
   end
   let(:mentions)    { described_class }
