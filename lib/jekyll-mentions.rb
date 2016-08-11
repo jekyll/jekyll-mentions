@@ -9,6 +9,7 @@ module Jekyll
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
     class << self
+      # rubocop:disable Metrics/AbcSize
       def mentionify(doc)
         return unless doc.output.include?("@")
         src = mention_base(doc.site.config)
