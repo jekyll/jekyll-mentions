@@ -4,6 +4,10 @@
 
   * Inherit Jekyll's rubocop config for consistency (#38)
 
+### Minor Enhancements
+
+  * Add support for building the base URL from ENV on Enterprise (#40)
+
 ## 1.1.3 / 2016-06-28
 
   * Allow uppercase chars in username (#33)
