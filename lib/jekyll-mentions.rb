@@ -61,11 +61,11 @@ module Jekyll
         mention_config = config["jekyll-mentions"]
         case mention_config
         when nil, NilClass
-          GITHUB_DOT_COM
+          default_mention_base
         when String
           mention_config.to_s
         when Hash
-          mention_config.fetch("base_url", GITHUB_DOT_COM)
+          mention_config.fetch("base_url", default_mention_base)
         else
           raise InvalidJekyllMentionConfig,
             "Your jekyll-mentions config has to either be a" \
@@ -81,6 +81,17 @@ module Jekyll
       def mentionable?(doc)
         (doc.is_a?(Jekyll::Page) || doc.write?) &&
           doc.output_ext == ".html" || (doc.permalink && doc.permalink.end_with?("/"))
+      end
+
+      private
+
+      def default_mention_base
+        if !ENV["SSL"].to_s.empty? && !ENV["GITHUB_HOSTNAME"].to_s.empty?
+          scheme = ENV["SSL"] == "true" ? "https://" : "http://"
+          "#{scheme}#{ENV["GITHUB_HOSTNAME"].chomp("/")}"
+        else
+          GITHUB_DOT_COM
+        end
       end
     end
   end

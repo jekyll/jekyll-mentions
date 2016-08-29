@@ -95,4 +95,40 @@ RSpec.describe(Jekyll::Mentions) do
       expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
     end
   end
+
+  context "with the SSL and GITHUB_HOSTNAME environment variables set" do
+    let(:ssl)                  { "true" }
+    let(:github_hostname)      { "github.vm" }
+    let(:default_mention_base) { "https://github.vm" }
+
+    before(:each) do
+      ENV["SSL"] = ssl
+      ENV["GITHUB_HOSTNAME"] = github_hostname
+    end
+
+    after(:each) do
+      ENV.delete("SSL")
+      ENV.delete("GITHUB_HOSTNAME")
+    end
+
+    it "has a default source based on SSL and GITHUB_HOSTNAME" do
+      expect(mentions.mention_base).to eql(default_mention_base)
+    end
+
+    it "uses correct mention URLs when SSL and GITHUB_HOSTNAME are set" do
+      # Re-render the site, so that ENV is used
+      site.render
+      expect(basic_post.output).to start_with(para(result.sub(default_src, default_mention_base)))
+    end
+
+    it "falls back to using the default if SSL is empty" do
+      ENV["SSL"] = ""
+      expect(mentions.mention_base).to eql(default_src)
+    end
+
+    it "falls back to using the default if GITHUB_HOSTNAME is empty" do
+      ENV["GITHUB_HOSTNAME"] = ""
+      expect(mentions.mention_base).to eql(default_src)
+    end
+  end
 end
