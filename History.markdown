@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Add rubocop to script/cibuild (#44)
+
 ## 1.2.0 / 2016-08-29
 
 ### Development Fixes
