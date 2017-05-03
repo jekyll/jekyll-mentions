@@ -1,3 +1,5 @@
 #! /bin/sh
 
-bundle exec rspec --color $@
+bundle exec rspec
+bundle exec rubocop -S -D
+gem build jekyll-mentions.gemspec

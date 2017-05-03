@@ -5,3 +5,7 @@ Metrics/LineLength:
   Exclude:
     - spec/**/*
     - jekyll-mentions.gemspec
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
