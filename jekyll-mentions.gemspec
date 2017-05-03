@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.add_dependency "html-pipeline", "~> 2.3"
   s.add_dependency "activesupport", "~> 4.0"
 
-  s.add_development_dependency "rake"
-  s.add_development_dependency "rdoc"
   s.add_development_dependency "rspec", "~> 3.0"
+  s.add_development_dependency "rubocop", "~> 0.48"
 end

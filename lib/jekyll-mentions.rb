@@ -22,6 +22,7 @@ module Jekyll
           doc.output = filter_with_mention(src).call(doc.output)[:output].to_s
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       # Public: Create or fetch the filter for the given {{src}} base URL.
       #
@@ -30,7 +31,7 @@ module Jekyll
       # Returns an HTML::Pipeline instance for the given base URL.
       def filter_with_mention(src)
         filters[src] ||= HTML::Pipeline.new([
-          HTML::Pipeline::MentionFilter
+          HTML::Pipeline::MentionFilter,
         ], { :base_url => src, :username_pattern => mention_username_pattern })
       end
 
@@ -97,6 +98,6 @@ module Jekyll
   end
 end
 
-Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+Jekyll::Hooks.register %i[pages documents], :post_render do |doc|
   Jekyll::Mentions.mentionify(doc) if Jekyll::Mentions.mentionable?(doc)
 end

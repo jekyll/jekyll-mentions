@@ -1,5 +1,3 @@
-require "spec_helper"
-
 RSpec.describe(Jekyll::Mentions) do
   Jekyll.logger.log_level = :error
 
@@ -9,7 +7,7 @@ RSpec.describe(Jekyll::Mentions) do
       "skip_config_files" => false,
       "collections"       => { "docs" => { "output" => true } },
       "source"            => fixtures_dir,
-      "destination"       => fixtures_dir("_site")
+      "destination"       => fixtures_dir("_site"),
     }))
   end
   let(:mentions)    { described_class }
@@ -83,7 +81,7 @@ RSpec.describe(Jekyll::Mentions) do
     let(:mentions_src) { "http://mine.club" }
     let(:config_overrides) do
       {
-        "jekyll-mentions" => { "base_url" => mentions_src }
+        "jekyll-mentions" => { "base_url" => mentions_src },
       }
     end
 
