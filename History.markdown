@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * Add rubocop to script/cibuild (#44)
+  * Rubocop: autocorrect (#49)
 
 ## 1.2.0 / 2016-08-29
 
