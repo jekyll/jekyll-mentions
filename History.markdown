@@ -5,6 +5,10 @@
   * Add rubocop to script/cibuild (#44)
   * Rubocop: autocorrect (#49)
 
+### Documentation
+
+  * Docs: Use `plugins` key by default (#50)
+
 ## 1.2.0 / 2016-08-29
 
 ### Development Fixes
