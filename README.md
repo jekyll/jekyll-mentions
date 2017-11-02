@@ -16,6 +16,13 @@ gem 'jekyll-mentions'
 And add the following to your site's `_config.yml`
 
 ```yml
+plugins:
+  - jekyll-mentions
+```
+
+Note: if `jekyll --version` is less than `3.5` use:
+
+```yml
 gems:
   - jekyll-mentions
 ```
@@ -48,7 +55,7 @@ jekyll-mentions: https://twitter.com
 An example of Twitter mentions using jekyll-mentions: 
 
 ```yaml
-gems:
+plugins:
   - jekyll-mentions
 
 jekyll-mentions:
