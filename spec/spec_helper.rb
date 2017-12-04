@@ -1,9 +1,8 @@
 # frozen_string_literal: true
-
-require File.expand_path("../../lib/jekyll-mentions.rb", __FILE__)
+require File.expand_path("../lib/jekyll-mentions.rb", __dir__)
 
 RSpec.configure do |config|
-  FIXTURES_DIR = File.expand_path("../fixtures", __FILE__)
+  FIXTURES_DIR = File.expand_path("fixtures", __dir__)
   def fixtures_dir(*paths)
     File.join(FIXTURES_DIR, *paths)
   end
