@@ -4,6 +4,7 @@
 
   * Add rubocop to script/cibuild (#44)
   * Rubocop: autocorrect (#49)
+  * Define path with __dir__ (#46)
 
 ### Documentation
 
