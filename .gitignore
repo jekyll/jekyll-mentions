@@ -1,6 +1,7 @@
-/vendor/gems
 .bundle
-bin
 /*.gem
-Gemfile.lock
 /tmp
+/vendor/gems
+bin
+Gemfile.lock
+pkg/*.gem
