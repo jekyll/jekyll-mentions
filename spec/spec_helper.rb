@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require File.expand_path("../lib/jekyll-mentions.rb", __dir__)
 
 RSpec.configure do |config|
