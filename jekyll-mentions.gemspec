@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+$LOAD_PATH.unshift File.expand_path("lib", __dir__)
+require("jekyll-mentions/version")
+
 Gem::Specification.new do |s|
   s.name        = "jekyll-mentions"
   s.summary     = "@mention support for your Jekyll site"
-  s.version     = "1.2.0"
+  s.version     = JekyllMentions::VERSION
   s.authors     = ["GitHub, Inc."]
   s.email       = "support@github.com"
 
