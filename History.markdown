@@ -7,6 +7,7 @@
   * Define path with __dir__ (#46)
   * Test against latest Rubies (#53)
   * Use a version constant (#54)
+  * Use default Rake tasks and scripts (#55)
 
 ### Documentation
 
