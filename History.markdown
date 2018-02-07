@@ -6,6 +6,7 @@
   * Rubocop: autocorrect (#49)
   * Define path with __dir__ (#46)
   * Test against latest Rubies (#53)
+  * Use a version constant (#54)
 
 ### Documentation
 
