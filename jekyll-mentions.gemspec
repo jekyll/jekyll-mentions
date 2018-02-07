@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.homepage    = "https://github.com/jekyll/jekyll-mentions"
   s.licenses    = ["MIT"]
-  s.files       = [ "lib/jekyll-mentions.rb" ]
+  s.files       = ["lib/jekyll-mentions.rb"]
 
   s.add_dependency "activesupport", "~> 4.0"
   s.add_dependency "html-pipeline", "~> 2.3"
