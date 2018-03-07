@@ -38,7 +38,7 @@ module Jekyll
       end
 
       def mention_username_pattern
-        @mention_username_pattern ||= %r![\w][\w_-]*!
+        @mention_username_pattern ||= %r![\w][\w-]*!
       end
 
       # Public: Filters hash where the key is the mention base URL.
