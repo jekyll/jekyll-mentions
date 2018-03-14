@@ -25,6 +25,7 @@ RSpec.describe(Jekyll::Mentions) do
   let(:basic_doc) { find_by_title(site.collections["docs"].docs, "File") }
   let(:doc_with_liquid) { find_by_title(site.collections["docs"].docs, "With Liquid") }
   let(:txt_doc) { find_by_title(site.collections["docs"].docs, "Don't Touch Me") }
+  let(:spl_chars_doc) { find_by_title(site.collections["docs"].docs, "Unconventional Names") }
 
   def para(content)
     "<p>#{content}</p>"
@@ -77,6 +78,28 @@ RSpec.describe(Jekyll::Mentions) do
     expect(doc_with_liquid.output).to start_with(
       para("#{result} <a href=\"/docs/with_liquid.html\">_docs/with_liquid.md</a>")
     )
+  end
+
+  context "with non-word characters" do
+    it "does not render when there's a leading hyphen" do
+      expect(spl_chars_doc.output).to start_with(para("Howdy @-pardner!"))
+    end
+
+    it "renders fine when there's a non-leading hyphen" do
+      expect(spl_chars_doc.output).to include(para(
+        "<a href=\"https://github.com/haTTric-\" class=\"user-mention\">@haTTric-</a> sez you are quite " \
+        "the <a href=\"https://github.com/task-master\" class=\"user-mention\">@task-master</a>.."
+      ))
+    end
+
+    it "renders fine when there's an underscore" do
+      expect(spl_chars_doc.output).to include(para(
+        "Checkout <a href=\"https://github.com/Casino_Royale\" class=\"user-mention\">@Casino_Royale</a>"
+      ))
+      expect(spl_chars_doc.output).to include(para(
+        "The Original <a href=\"https://github.com/_Bat_Cave\" class=\"user-mention\">@_Bat_Cave</a>"
+      ))
+    end
   end
 
   context "with a different base for jmentions" do
