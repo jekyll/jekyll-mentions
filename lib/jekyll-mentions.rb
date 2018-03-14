@@ -18,9 +18,13 @@ module Jekyll
         if doc.output.include? BODY_START_TAG
           parsed_doc    = Nokogiri::HTML::Document.parse(doc.output)
           body          = parsed_doc.at_css("body")
+
+          return unless body.to_html =~ filter_regex
+
           body.children = filter_with_mention(src).call(body.inner_html)[:output].to_s
           doc.output    = parsed_doc.to_html
         else
+          return unless doc.output =~ filter_regex
           doc.output = filter_with_mention(src).call(doc.output)[:output].to_s
         end
       end
@@ -84,6 +88,16 @@ module Jekyll
       end
 
       private
+
+      def filter_regex
+        @filter_regex ||= begin
+          Regexp.new(
+            HTML::Pipeline::MentionFilter::MentionPatterns[mention_username_pattern]
+          )
+        rescue TypeError
+          %r!@\w+!
+        end
+      end
 
       def default_mention_base
         if !ENV["SSL"].to_s.empty? && !ENV["GITHUB_HOSTNAME"].to_s.empty?
