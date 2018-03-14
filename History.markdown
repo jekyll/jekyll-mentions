@@ -16,6 +16,7 @@
 ### Minor Enhancements
 
   * Allow underscores in usernames (#57)
+  * Mentionify only relevant docs or pages (#56)
 
 ## 1.2.0 / 2016-08-29
 
