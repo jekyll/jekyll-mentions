@@ -103,7 +103,7 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   context "with a different base for jmentions" do
-    let(:mentions_src) { "http://mine.club" }
+    let(:mentions_src) { "https://twitter.com" }
     let(:config_overrides) do
       {
         "jekyll-mentions" => { "base_url" => mentions_src },
