@@ -13,6 +13,10 @@
 
   * Docs: Use `plugins` key by default (#50)
 
+### Minor Enhancements
+
+  * Allow underscores in usernames (#57)
+
 ## 1.2.0 / 2016-08-29
 
 ### Development Fixes
