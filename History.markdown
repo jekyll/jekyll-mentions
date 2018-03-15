@@ -1,3 +1,7 @@
+## HEAD
+
+  * Release 1.3.0 (#58)
+
 ## 1.3.0 / 2018-03-14
 
 ### Development Fixes
