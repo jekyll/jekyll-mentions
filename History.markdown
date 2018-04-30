@@ -2,6 +2,10 @@
 
   * Release 1.3.0 (#58)
 
+### -minor
+
+  * Rubocop 0.55 (#61)
+
 ## 1.3.0 / 2018-03-14
 
 ### Development Fixes
