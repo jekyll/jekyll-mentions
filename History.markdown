@@ -1,10 +1,11 @@
 ## HEAD
 
-  * Release 1.3.0 (#58)
-
-### -minor
-
+  * Release 1.3.0 ### -minor (#58)
   * Rubocop 0.55 (#61)
+
+### Minor Enhancements
+
+  * Drop support for Ruby 2.2.x (#60)
 
 ## 1.3.0 / 2018-03-14
 
