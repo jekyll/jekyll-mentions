@@ -5,8 +5,8 @@ require "html/pipeline"
 
 module Jekyll
   class Mentions
-    GITHUB_DOT_COM = "https://github.com".freeze
-    BODY_START_TAG = "<body".freeze
+    GITHUB_DOT_COM = "https://github.com"
+    BODY_START_TAG = "<body"
 
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
@@ -84,7 +84,7 @@ module Jekyll
       # Returns true if the doc is written & is HTML.
       def mentionable?(doc)
         (doc.is_a?(Jekyll::Page) || doc.write?) &&
-          doc.output_ext == ".html" || (doc.permalink && doc.permalink.end_with?("/"))
+          doc.output_ext == ".html" || (doc.permalink&.end_with?("/"))
       end
 
       private
