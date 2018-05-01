@@ -2,15 +2,14 @@
 
 ### Minor Enhancements
 
-  * Bump Rubocop to 0.55 (#61)
   * Drop support for Ruby 2.2.x (#61)
   * Relax version constraint on ActiveSupport (#60)
+  * Bump Rubocop to 0.55 (#61)
 
 ## 1.3.0 / 2018-03-14
 
 ### Development Fixes
 
-  * Release 1.3.0 (#58)
   * Add rubocop to script/cibuild (#44)
   * Rubocop: autocorrect (#49)
   * Define path with __dir__ (#46)
@@ -20,7 +19,7 @@
 
 ### Documentation
 
-  * Docs: Use `plugins` key by default (#50)
+  * Use `plugins` key by default (#50)
 
 ### Minor Enhancements
 
