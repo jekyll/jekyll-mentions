@@ -8,24 +8,27 @@ module Jekyll
     GITHUB_DOT_COM = "https://github.com"
     BODY_START_TAG = "<body"
 
+    OPENING_BODY_TAG_REGEX = %r!<body(.*)>\s*!
+
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
     class << self
       # rubocop:disable Metrics/AbcSize
       def mentionify(doc)
-        return unless doc.output.include?("@")
+        content = doc.output
+        return unless content.include?("@")
         src = mention_base(doc.site.config)
-        if doc.output.include? BODY_START_TAG
-          parsed_doc    = Nokogiri::HTML::Document.parse(doc.output)
-          body          = parsed_doc.at_css("body")
+        if content.include? BODY_START_TAG
+          head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
+          body_content, *rest = tail.partition("</body>")
 
-          return unless body.to_html =~ filter_regex
+          return unless body_content =~ filter_regex
 
-          body.children = filter_with_mention(src).call(body.inner_html)[:output].to_s
-          doc.output    = parsed_doc.to_html
+          processed_markup = filter_with_mention(src).call(body_content)[:output].to_s
+          doc.output       = String.new(head) << opener << processed_markup << rest.join
         else
-          return unless doc.output =~ filter_regex
-          doc.output = filter_with_mention(src).call(doc.output)[:output].to_s
+          return unless content =~ filter_regex
+          doc.output = filter_with_mention(src).call(content)[:output].to_s
         end
       end
       # rubocop:enable Metrics/AbcSize
