@@ -6,6 +6,7 @@
   * Relax version constraint on ActiveSupport (#60)
   * Bump Rubocop to 0.55 (#61)
   * Drop dependency on ActiveSupport (#63)
+  * Parse only content necessary to mentionify doc (#59)
 
 ## 1.3.0 / 2018-03-14
 
