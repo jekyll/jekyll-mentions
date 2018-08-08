@@ -8,7 +8,7 @@ module Jekyll
     GITHUB_DOT_COM = "https://github.com"
     BODY_START_TAG = "<body"
 
-    OPENING_BODY_TAG_REGEX = %r!<body(.*)>\s*!
+    OPENING_BODY_TAG_REGEX = %r!<body(.*?)>\s*!
 
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 

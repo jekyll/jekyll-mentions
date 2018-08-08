@@ -61,6 +61,10 @@ RSpec.describe(Jekyll::Mentions) do
     expect(site.pages.first.output).to include(para(result))
   end
 
+  it "correctly replaces the mentions with the link in minified pages" do
+    expect(find_by_title(site.pages, "I'm minified!").output).to include(para(result))
+  end
+
   it "doesn't mangle layouts" do
     expect(site.pages.first.output).to include("<html lang=\"en-US\">")
     expect(site.pages.first.output).to include("<body class=\"wrap\">\n")
