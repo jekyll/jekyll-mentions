@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Do not match the body tag eagerly (#64)
+
 ## 1.4.0 / 2018-05-02
 
 ### Minor Enhancements
