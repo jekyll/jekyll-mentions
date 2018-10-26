@@ -95,13 +95,14 @@ module Jekyll
       private
 
       def filter_regex
-        @filter_regex ||= begin
-          Regexp.new(
-            HTML::Pipeline::MentionFilter::MentionPatterns[mention_username_pattern]
-          )
-                          rescue TypeError
-                            %r!@\w+!
-        end
+        @filter_regex ||=
+          begin
+            Regexp.new(
+              HTML::Pipeline::MentionFilter::MentionPatterns[mention_username_pattern]
+            )
+          rescue TypeError
+            %r!@\w+!
+          end
       end
 
       def default_mention_base
