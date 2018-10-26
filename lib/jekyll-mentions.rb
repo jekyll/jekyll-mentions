@@ -8,7 +8,7 @@ module Jekyll
     GITHUB_DOT_COM = "https://github.com"
     BODY_START_TAG = "<body"
 
-    OPENING_BODY_TAG_REGEX = %r!<body(.*?)>\s*!
+    OPENING_BODY_TAG_REGEX = %r!<body(.*?)>\s*!.freeze
 
     InvalidJekyllMentionConfig = Class.new(Jekyll::Errors::FatalException)
 
@@ -17,6 +17,7 @@ module Jekyll
       def mentionify(doc)
         content = doc.output
         return unless content.include?("@")
+
         src = mention_base(doc.site.config)
         if content.include? BODY_START_TAG
           head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
@@ -28,6 +29,7 @@ module Jekyll
           doc.output       = String.new(head) << opener << processed_markup << rest.join
         else
           return unless content =~ filter_regex
+
           doc.output = filter_with_mention(src).call(content)[:output].to_s
         end
       end
@@ -97,8 +99,8 @@ module Jekyll
           Regexp.new(
             HTML::Pipeline::MentionFilter::MentionPatterns[mention_username_pattern]
           )
-        rescue TypeError
-          %r!@\w+!
+                          rescue TypeError
+                            %r!@\w+!
         end
       end
 
