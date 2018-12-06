@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * chore(deps): rubocop-jekyll 0.3 (#65)
+
 ## 1.4.1 / 2018-08-08
 
 ### Bug Fixes
