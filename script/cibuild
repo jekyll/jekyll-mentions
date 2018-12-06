@@ -3,5 +3,4 @@
 set -e
 
 script/test
-script/fmt
 bundle exec rake build
