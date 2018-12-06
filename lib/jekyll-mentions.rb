@@ -43,7 +43,7 @@ module Jekyll
       def filter_with_mention(src)
         filters[src] ||= HTML::Pipeline.new([
           HTML::Pipeline::MentionFilter,
-        ], { :base_url => src, :username_pattern => mention_username_pattern })
+        ], :base_url => src, :username_pattern => mention_username_pattern)
       end
 
       def mention_username_pattern
@@ -77,8 +77,8 @@ module Jekyll
           mention_config.fetch("base_url", default_mention_base)
         else
           raise InvalidJekyllMentionConfig,
-            "Your jekyll-mentions config has to either be a" \
-            " string or a hash. It's a #{mention_config.class} right now."
+                "Your jekyll-mentions config has to either be a string or a hash. " \
+                "It's a #{mention_config.class} right now."
         end
       end
 
@@ -117,6 +117,6 @@ module Jekyll
   end
 end
 
-Jekyll::Hooks.register %i[pages documents], :post_render do |doc|
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   Jekyll::Mentions.mentionify(doc) if Jekyll::Mentions.mentionable?(doc)
 end
