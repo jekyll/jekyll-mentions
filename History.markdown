@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * chore(deps): rubocop-jekyll 0.3 (#65)
+  * Reintroduce style checks (#67)
 
 ## 1.4.1 / 2018-08-08
 
