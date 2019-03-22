@@ -1,7 +1,9 @@
-## HEAD
+## 1.5.0 / 2019-03-22
 
 ### Development Fixes
 
+  * Allow Jekyll v4 (still alpha)
+  * Drop support for Ruby 2.3
   * chore(deps): rubocop-jekyll 0.3 (#65)
   * Reintroduce style checks (#67)
 
