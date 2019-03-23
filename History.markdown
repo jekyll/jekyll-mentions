@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Re-introduce Ruby 2.3 support and test with Jekyll 3.7 and beyond (#69)
+
 ## 1.5.0 / 2019-03-22
 
 ### Development Fixes
