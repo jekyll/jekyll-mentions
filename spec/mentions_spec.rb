@@ -86,6 +86,10 @@ RSpec.describe(Jekyll::Mentions) do
     )
   end
 
+  it "works with HTML body tag markup across multiple lines" do
+    expect(find_by_title(site.pages, "Multi-line Body Tag").output).to include(para(result))
+  end
+
   context "with non-word characters" do
     it "does not render when there's a leading hyphen" do
       expect(spl_chars_doc.output).to start_with(para("Howdy @-pardner!"))
