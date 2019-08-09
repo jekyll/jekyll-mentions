@@ -5,9 +5,6 @@ inherit_gem:
 AllCops:
   Exclude:
     - vendor/**/*
-Layout/FirstParameterIndentation:
-  Exclude:
-    - spec/**/*
 Metrics/BlockLength:
   Exclude:
     - spec/**/*

@@ -96,19 +96,25 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "renders fine when there's a non-leading hyphen" do
-      expect(spl_chars_doc.output).to include(para(
-        "<a href=\"https://github.com/haTTric-\" class=\"user-mention\">@haTTric-</a> sez you are quite " \
-        "the <a href=\"https://github.com/task-master\" class=\"user-mention\">@task-master</a>.."
-      ))
+      expect(spl_chars_doc.output).to include(
+        para(
+          "<a href=\"https://github.com/haTTric-\" class=\"user-mention\">@haTTric-</a> sez you are quite " \
+          "the <a href=\"https://github.com/task-master\" class=\"user-mention\">@task-master</a>.."
+        )
+      )
     end
 
     it "renders fine when there's an underscore" do
-      expect(spl_chars_doc.output).to include(para(
-        "Checkout <a href=\"https://github.com/Casino_Royale\" class=\"user-mention\">@Casino_Royale</a>"
-      ))
-      expect(spl_chars_doc.output).to include(para(
-        "The Original <a href=\"https://github.com/_Bat_Cave\" class=\"user-mention\">@_Bat_Cave</a>"
-      ))
+      expect(spl_chars_doc.output).to include(
+        para(
+          "Checkout <a href=\"https://github.com/Casino_Royale\" class=\"user-mention\">@Casino_Royale</a>"
+        )
+      )
+      expect(spl_chars_doc.output).to include(
+        para(
+          "The Original <a href=\"https://github.com/_Bat_Cave\" class=\"user-mention\">@_Bat_Cave</a>"
+        )
+      )
     end
   end
 
