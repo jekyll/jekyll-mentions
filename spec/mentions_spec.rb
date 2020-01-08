@@ -123,11 +123,47 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "fetches the custom base from the config" do
-      expect(mentions.mention_base(site.config)).to eql(mentions_src)
+      expect(mentions.mention_base(:site_config => site.config)).to eql(mentions_src)
     end
 
     it "respects the new base when mentionsfying" do
       expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
+    end
+  end
+
+  context "when the different base is defined in the frontmatter of the page" do
+    let(:mentions_src) { "https://twitter.com" }
+    let(:page_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => mentions_src },
+      }
+    end
+    let(:config_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => default_src },
+      }
+    end
+
+    it "fetches the custom base from the config" do
+      expect(mentions.mention_base(:site_config => site.config, :page_config => page_overrides)).to eql(mentions_src)
+    end
+  end
+
+  context "when the different base is defined in the frontmatter of the post" do
+    let(:mentions_src) { "https://twitter.com" }
+    let(:post_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => mentions_src },
+      }
+    end
+    let(:config_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => default_src },
+      }
+    end
+
+    it "fetches the custom base from the config" do
+      expect(mentions.mention_base(:site_config => site.config, :post_config => post_overrides)).to eql(mentions_src)
     end
   end
 
