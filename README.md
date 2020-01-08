@@ -83,7 +83,7 @@ jekyll-mentions: https://facebook.com
 
 Now, every single mentions in the site will use the base URL defined in the `_config.yml`, EXCEPT in the file where you set the base URL to be something different.
 
-If you wish to change the base URL for a single mentions in a file, but not every mentions in that file, then you'll have to link to the URL the old-fashioned way:
+If you wish to change the base URL for a single mention, but not every mentions in that file, then you'll have to link to the URL the old-fashioned way:
 
 ```markdown
 [@benbalter](https://instagram.com/benbalter)
