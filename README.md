@@ -89,7 +89,7 @@ If you wish to change the base URL for a single mentions in a file, but not ever
 [@benbalter](https://instagram.com/benbalter)
 ```
 
-Now, let's say you have a single file where you DON'T want your mentions to become mentionable, AKA you want that to stay plain text. You can do that by specifying `false` in the frontmatter of that file:
+Now, let's say you have a single file where you _don't_ want your mentions to become mentionable, AKA you want that to stay plain text. You can do that by specifying `false` in the frontmatter of that file:
 
 ```yaml
 jekyll-mentions: false
