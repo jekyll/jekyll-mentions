@@ -75,7 +75,7 @@ jekyll-mentions:
   base_url: https://facebook.com
 ```
 
-If you're lazy like me, you can use this shorthand:
+You also can use this shorthand:
 
 ```yaml
 jekyll-mentions: https://facebook.com
