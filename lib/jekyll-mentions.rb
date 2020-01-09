@@ -18,7 +18,7 @@ module Jekyll
         content = doc.output
         return unless content.include?("@")
 
-        src = mention_base(doc.site.config, doc.data)
+        src = mention_base(doc.site.config.merge(doc.data || {}))
 
         if content.include? BODY_START_TAG
           head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
@@ -58,18 +58,18 @@ module Jekyll
       end
 
       # Public: Calculate the base URL to use for mentioning.
-      # The custom base URL can be defined in either the site config or a
-      # document's front matter as jekyll-mentions.base_url or jekyll-mentions,
-      # and must be a valid URL (i.e. it must include a protocol and valid
-      # domain). It should _not_ have a trailing slash.
       #
-      # site_config - the hash-like configuration of the entire site's config
-      # doc_config - the hash-like configuration of the doc's config
+      # The custom base URL can be defined in either the site config or a document's
+      # front matter as `jekyll-mentions.base_url` or `jekyll-mentions`, and must be
+      # a valid URL (i.e. it must include a protocol and valid domain).
+      # It should _not_ have a trailing slash.
+      #
+      # config - The effective configuration that includes configurations for mentions.
       #
       # Returns a URL to use as the base URL for mentions.
       # Defaults to the https://github.com.
-      def mention_base(site_config, doc_config)
-        mention_config = mention_config(site_config, doc_config)
+      def mention_base(config = {})
+        mention_config = config["jekyll-mentions"]
         case mention_config
         when nil, NilClass
           default_mention_base
@@ -106,10 +106,6 @@ module Jekyll
           rescue TypeError
             %r!@\w+!
           end
-      end
-
-      def mention_config(site_config, doc_config)
-        (site_config || {}).merge(doc_config || {})["jekyll-mentions"]
       end
 
       def default_mention_base
