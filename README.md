@@ -66,7 +66,7 @@ jekyll-mentions:
 
 Et voilà! Your mentions will now use that base URL instead of the default of `https://github.com`.
 
-### Within a page's frontmatter
+### Within a page's front matter
 
 Now do you want to override the base URL for just a single page/post? No problem. Just set the base URL for that specific page in the frontmatter:
 
