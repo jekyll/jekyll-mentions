@@ -45,7 +45,7 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "has a default source" do
-    expect(mentions.mention_base(nil, nil)).to eql(default_src)
+    expect(mentions.mention_base).to eql(default_src)
   end
 
   it "correctly replaces the mentions with the img in posts" do
@@ -123,10 +123,10 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "fetches the custom base from the config" do
-      expect(mentions.mention_base(site.config, nil)).to eql(mentions_src)
+      expect(mentions.mention_base(site.config)).to eql(mentions_src)
     end
 
-    it "respects the new base when mentionsfying" do
+    it "respects the new base when mentionifying" do
       expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
     end
   end
@@ -145,7 +145,8 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "fetches the custom base from the config" do
-      expect(mentions.mention_base(site.config, doc_overrides)).to eql(mentions_src)
+      effective_overrides = site.config.merge(doc_overrides)
+      expect(mentions.mention_base(effective_overrides)).to eql(mentions_src)
     end
   end
 
@@ -165,7 +166,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "has a default source based on SSL and GITHUB_HOSTNAME" do
-      expect(mentions.mention_base(nil, nil)).to eql(default_mention_base)
+      expect(mentions.mention_base).to eql(default_mention_base)
     end
 
     it "uses correct mention URLs when SSL and GITHUB_HOSTNAME are set" do
@@ -176,12 +177,12 @@ RSpec.describe(Jekyll::Mentions) do
 
     it "falls back to using the default if SSL is empty" do
       ENV["SSL"] = ""
-      expect(mentions.mention_base(nil, nil)).to eql(default_src)
+      expect(mentions.mention_base).to eql(default_src)
     end
 
     it "falls back to using the default if GITHUB_HOSTNAME is empty" do
       ENV["GITHUB_HOSTNAME"] = ""
-      expect(mentions.mention_base(nil, nil)).to eql(default_src)
+      expect(mentions.mention_base).to eql(default_src)
     end
   end
 end
