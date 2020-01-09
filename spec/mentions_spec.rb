@@ -45,7 +45,7 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "has a default source" do
-    expect(mentions.mention_base).to eql(default_src)
+    expect(mentions.mention_base(nil, nil)).to eql(default_src)
   end
 
   it "correctly replaces the mentions with the img in posts" do
@@ -123,7 +123,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "fetches the custom base from the config" do
-      expect(mentions.mention_base(:site_config => site.config)).to eql(mentions_src)
+      expect(mentions.mention_base(site.config, nil)).to eql(mentions_src)
     end
 
     it "respects the new base when mentionsfying" do
@@ -131,9 +131,9 @@ RSpec.describe(Jekyll::Mentions) do
     end
   end
 
-  context "when the different base is defined in the front matter of the page" do
+  context "when the different base is defined in the front matter of the doc" do
     let(:mentions_src) { "https://twitter.com" }
-    let(:page_overrides) do
+    let(:doc_overrides) do
       {
         "jekyll-mentions" => { "base_url" => mentions_src },
       }
@@ -145,25 +145,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "fetches the custom base from the config" do
-      expect(mentions.mention_base(:site_config => site.config, :page_config => page_overrides)).to eql(mentions_src)
-    end
-  end
-
-  context "when the different base is defined in the front matter of the post" do
-    let(:mentions_src) { "https://twitter.com" }
-    let(:post_overrides) do
-      {
-        "jekyll-mentions" => { "base_url" => mentions_src },
-      }
-    end
-    let(:config_overrides) do
-      {
-        "jekyll-mentions" => { "base_url" => default_src },
-      }
-    end
-
-    it "fetches the custom base from the config" do
-      expect(mentions.mention_base(:site_config => site.config, :post_config => post_overrides)).to eql(mentions_src)
+      expect(mentions.mention_base(site.config, doc_overrides)).to eql(mentions_src)
     end
   end
 
@@ -183,7 +165,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
 
     it "has a default source based on SSL and GITHUB_HOSTNAME" do
-      expect(mentions.mention_base).to eql(default_mention_base)
+      expect(mentions.mention_base(nil, nil)).to eql(default_mention_base)
     end
 
     it "uses correct mention URLs when SSL and GITHUB_HOSTNAME are set" do
@@ -194,12 +176,12 @@ RSpec.describe(Jekyll::Mentions) do
 
     it "falls back to using the default if SSL is empty" do
       ENV["SSL"] = ""
-      expect(mentions.mention_base).to eql(default_src)
+      expect(mentions.mention_base(nil, nil)).to eql(default_src)
     end
 
     it "falls back to using the default if GITHUB_HOSTNAME is empty" do
       ENV["GITHUB_HOSTNAME"] = ""
-      expect(mentions.mention_base).to eql(default_src)
+      expect(mentions.mention_base(nil, nil)).to eql(default_src)
     end
   end
 end

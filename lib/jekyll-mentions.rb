@@ -18,11 +18,7 @@ module Jekyll
         content = doc.output
         return unless content.include?("@")
 
-        src = mention_base(
-          :site_config => doc.site.config,
-          :page_config => page_config(doc),
-          :post_config => post_config(doc)
-        )
+        src = mention_base(doc.site.config, doc.data)
 
         if content.include? BODY_START_TAG
           head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
@@ -62,22 +58,18 @@ module Jekyll
       end
 
       # Public: Calculate the base URL to use for mentioning.
-      # The custom base URL can be defined in the config as
-      # jekyll-mentions.base_url or jekyll-mentions, and must
-      # be a valid URL (i.e. it must include a protocol and valid domain)
-      # It should _not_ have a trailing slash.
+      # The custom base URL can be defined in either the site config or a
+      # document's front matter as jekyll-mentions.base_url or jekyll-mentions,
+      # and must be a valid URL (i.e. it must include a protocol and valid
+      # domain). It should _not_ have a trailing slash.
       #
-      # config - a hash of key-value pairs, any of which the value can be nil
-      #   :site_config => the hash-like configuration of the document's site config
-      #   :page_config => the hash-like configuration of the page's site config
-      #                   (if the current doc is a page)
-      #   :post_config => the hash-like configuration of the post's site config
-      #                   (if the current doc is a post)
+      # site_config - the hash-like configuration of the entire site's config
+      # doc_config - the hash-like configuration of the doc's config
       #
       # Returns a URL to use as the base URL for mentions.
       # Defaults to the https://github.com.
-      def mention_base(config = {})
-        mention_config = mention_config(config)
+      def mention_base(site_config, doc_config)
+        mention_config = mention_config(site_config, doc_config)
         case mention_config
         when nil, NilClass
           default_mention_base
@@ -100,49 +92,10 @@ module Jekyll
       def mentionable?(doc)
         (doc.is_a?(Jekyll::Page) || doc.write?) &&
           (doc.output_ext == ".html" || (doc.permalink&.end_with?("/"))) &&
-          !mentionable_disabled?(doc)
+          (doc.data["jekyll-mentions"] != false)
       end
 
       private
-
-      # Private: Returns a boolean indicating whether the front matter of a specific doc explicitly
-      # disables jekyll-mentions
-      #
-      # doc - the current Jekyll::Document
-      #
-      # Returns true if the front matter of the doc sets jekyll-mentions to false, else false
-      def mentionable_disabled?(doc)
-        page_config = page_config(doc) || {}
-        post_config = post_config(doc) || {}
-        page_config.merge(post_config)["jekyll-mentions"] == false
-      end
-
-      # Private: Finds the current post's config that's normally found in the front matter
-      # of the page (this method assumes that your posts are in a `_posts/` directory)
-      #
-      # doc - the current Jekyll::Document
-      #
-      # Returns a hash-like configuration of the current post's config or nil
-      def post_config(doc)
-        return unless doc.path.include?("_posts") || doc.path.include?("_drafts")
-
-        page_reader = Jekyll::PageReader.new(doc.site, doc.path)
-        page_reader.read([doc.path]).first.data
-      end
-
-      # Private: Finds the current page's config that's normally found in the front matter
-      # of the page
-      #
-      # doc - the current Jekyll::Document
-      #
-      # Returns a hash-like configuration of the current page's config or nil
-      def page_config(doc)
-        filtered_pages = doc.site.pages.select { |page| page.name == (doc.basename + doc.extname) }
-        return unless filtered_pages.size == 1
-
-        page = filtered_pages.first
-        page.data
-      end
 
       def filter_regex
         @filter_regex ||=
@@ -155,11 +108,8 @@ module Jekyll
           end
       end
 
-      def mention_config(config)
-        site_config = config[:site_config] || {}
-        page_config = config[:page_config] || {}
-        post_config = config[:post_config] || {}
-        page_config.merge(post_config)["jekyll-mentions"] || site_config["jekyll-mentions"]
+      def mention_config(site_config, doc_config)
+        (site_config || {}).merge(doc_config || {})["jekyll-mentions"]
       end
 
       def default_mention_base
