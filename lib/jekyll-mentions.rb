@@ -7,7 +7,6 @@ module Jekyll
   class Mentions
     GITHUB_DOT_COM = "https://github.com"
     BODY_START_TAG = "<body"
-    JEKYLL_MENTIONS = "jekyll-mentions"
 
     OPENING_BODY_TAG_REGEX = %r!<body(.*?)>\s*!.freeze
 
@@ -115,7 +114,7 @@ module Jekyll
       def mentionable_disabled?(doc)
         page_config = page_config(doc) || {}
         post_config = post_config(doc) || {}
-        page_config.merge(post_config)[JEKYLL_MENTIONS] == false
+        page_config.merge(post_config)["jekyll-mentions"] == false
       end
 
       # Private: Finds the current post's config that's normally found in the front matter
@@ -125,7 +124,7 @@ module Jekyll
       #
       # Returns a hash-like configuration of the current post's config or nil
       def post_config(doc)
-        return unless doc.path.include?("_posts")
+        return unless doc.path.include?("_posts") || doc.path.include?("_drafts")
 
         page_reader = Jekyll::PageReader.new(doc.site, doc.path)
         page_reader.read([doc.path]).first.data
@@ -138,7 +137,7 @@ module Jekyll
       #
       # Returns a hash-like configuration of the current page's config or nil
       def page_config(doc)
-        filtered_pages = doc.site.pages.select { |page| page.name == doc.path.split("/")[-1] }
+        filtered_pages = doc.site.pages.select { |page| page.name == (doc.basename + doc.extname) }
         return unless filtered_pages.size == 1
 
         page = filtered_pages.first
@@ -160,7 +159,7 @@ module Jekyll
         site_config = config[:site_config] || {}
         page_config = config[:page_config] || {}
         post_config = config[:post_config] || {}
-        page_config.merge(post_config)[JEKYLL_MENTIONS] || site_config[JEKYLL_MENTIONS]
+        page_config.merge(post_config)["jekyll-mentions"] || site_config["jekyll-mentions"]
       end
 
       def default_mention_base
