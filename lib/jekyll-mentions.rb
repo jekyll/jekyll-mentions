@@ -106,19 +106,19 @@ module Jekyll
 
       private
 
-      # Private: Returns a boolean indicating whether the frontmatter of a specific doc explicitly
+      # Private: Returns a boolean indicating whether the front matter of a specific doc explicitly
       # disables jekyll-mentions
       #
       # doc - the current Jekyll::Document
       #
-      # Returns true if the frontmatter of the doc sets jekyll-mentions to false, else false
+      # Returns true if the front matter of the doc sets jekyll-mentions to false, else false
       def mentionable_disabled?(doc)
         page_config = page_config(doc) || {}
         post_config = post_config(doc) || {}
         page_config.merge(post_config)[JEKYLL_MENTIONS] == false
       end
 
-      # Private: Finds the current post's config that's normally found in the frontmatter
+      # Private: Finds the current post's config that's normally found in the front matter
       # of the page (this method assumes that your posts are in a `_posts/` directory)
       #
       # doc - the current Jekyll::Document

@@ -68,7 +68,7 @@ Et voilà! Your mentions will now use that base URL instead of the default of `h
 
 ### Within a page's front matter
 
-Now do you want to override the base URL for just a single page/post? No problem. Just set the base URL for that specific page in the frontmatter:
+Now do you want to override the base URL for just a single page/post? No problem. Just set the base URL for that specific page in the front matter:
 
 ```yaml
 jekyll-mentions:
@@ -89,7 +89,7 @@ If you wish to change the base URL for a single mention, but not every mentions 
 [@benbalter](https://instagram.com/benbalter)
 ```
 
-Now, let's say you have a single file where you _don't_ want your mentions to become mentionable, AKA you want that to stay plain text. You can do that by specifying `false` in the frontmatter of that file:
+Now, let's say you have a single file where you _don't_ want your mentions to become mentionable, AKA you want that to stay plain text. You can do that by specifying `false` in the front matter of that file:
 
 ```yaml
 jekyll-mentions: false

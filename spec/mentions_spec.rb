@@ -131,7 +131,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
   end
 
-  context "when the different base is defined in the frontmatter of the page" do
+  context "when the different base is defined in the front matter of the page" do
     let(:mentions_src) { "https://twitter.com" }
     let(:page_overrides) do
       {
@@ -149,7 +149,7 @@ RSpec.describe(Jekyll::Mentions) do
     end
   end
 
-  context "when the different base is defined in the frontmatter of the post" do
+  context "when the different base is defined in the front matter of the post" do
     let(:mentions_src) { "https://twitter.com" }
     let(:post_overrides) do
       {
