@@ -131,7 +131,7 @@ module Jekyll
         page_reader.read([doc.path]).first.data
       end
 
-      # Private: Finds the current page's config that's normally found in the frontmatter
+      # Private: Finds the current page's config that's normally found in the front matter
       # of the page
       #
       # doc - the current Jekyll::Document
