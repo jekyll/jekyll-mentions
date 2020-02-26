@@ -18,7 +18,8 @@ module Jekyll
         content = doc.output
         return unless content.include?("@")
 
-        src = mention_base(doc.site.config)
+        src = mention_base(doc.site.config.merge(doc.data || {}))
+
         if content.include? BODY_START_TAG
           head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
           body_content, *rest = tail.partition("</body>")
@@ -57,12 +58,13 @@ module Jekyll
       end
 
       # Public: Calculate the base URL to use for mentioning.
-      # The custom base URL can be defined in the config as
-      # jekyll-mentions.base_url or jekyll-mentions, and must
-      # be a valid URL (i.e. it must include a protocol and valid domain)
+      #
+      # The custom base URL can be defined in either the site config or a document's
+      # front matter as `jekyll-mentions.base_url` or `jekyll-mentions`, and must be
+      # a valid URL (i.e. it must include a protocol and valid domain).
       # It should _not_ have a trailing slash.
       #
-      # config - the hash-like configuration of the document's site
+      # config - The effective configuration that includes configurations for mentions.
       #
       # Returns a URL to use as the base URL for mentions.
       # Defaults to the https://github.com.
@@ -82,14 +84,15 @@ module Jekyll
         end
       end
 
-      # Public: Defines the conditions for a document to be emojiable.
+      # Public: Defines the conditions for a document to be mentionable.
       #
       # doc - the Jekyll::Document or Jekyll::Page
       #
       # Returns true if the doc is written & is HTML.
       def mentionable?(doc)
         (doc.is_a?(Jekyll::Page) || doc.write?) &&
-          doc.output_ext == ".html" || (doc.permalink&.end_with?("/"))
+          (doc.output_ext == ".html" || (doc.permalink&.end_with?("/"))) &&
+          (doc.data["jekyll-mentions"] != false)
       end
 
       private
