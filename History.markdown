@@ -1,3 +1,9 @@
+## HEAD
+
+### Minor Enhancements
+
+  * Allow configuring base URL in page front matter (#72)
+
 ## 1.5.1 / 2019-03-23
 
 ### Bug Fixes

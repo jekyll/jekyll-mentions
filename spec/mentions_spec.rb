@@ -28,6 +28,11 @@ RSpec.describe(Jekyll::Mentions) do
   let(:doc_with_liquid) { find_by_title(site.collections["docs"].docs, "With Liquid") }
   let(:txt_doc) { find_by_title(site.collections["docs"].docs, "Don't Touch Me") }
   let(:spl_chars_doc) { find_by_title(site.collections["docs"].docs, "Unconventional Names") }
+  let(:index_page) { find_by_title(site.pages, "I'm a page") }
+  let(:minified_page) { find_by_title(site.pages, "I'm minified!") }
+  let(:disabled_mentioning_page) { find_by_title(site.pages, "ignore all mentions") }
+  let(:custom_url_01) { find_by_title(site.pages, "custom URL 01") }
+  let(:custom_url_02) { find_by_title(site.pages, "custom URL 02") }
 
   def para(content)
     "<p>#{content}</p>"
@@ -60,16 +65,16 @@ RSpec.describe(Jekyll::Mentions) do
   end
 
   it "correctly replaces the mentions with the link in pages" do
-    expect(site.pages.first.output).to include(para(result))
+    expect(index_page.output).to include(para(result))
   end
 
   it "correctly replaces the mentions with the link in minified pages" do
-    expect(find_by_title(site.pages, "I'm minified!").output).to include(para(result))
+    expect(minified_page.output).to include(para(result))
   end
 
   it "doesn't mangle layouts" do
-    expect(site.pages.first.output).to include("<html lang=\"en-US\">")
-    expect(site.pages.first.output).to include("<body class=\"wrap\">\n")
+    expect(index_page.output).to include("<html lang=\"en-US\">")
+    expect(index_page.output).to include("<body class=\"wrap\">\n")
   end
 
   it "correctly replaces the mentions with the link in collection documents" do
@@ -88,6 +93,50 @@ RSpec.describe(Jekyll::Mentions) do
 
   it "works with HTML body tag markup across multiple lines" do
     expect(find_by_title(site.pages, "Multi-line Body Tag").output).to include(para(result))
+  end
+
+  context "when jekyll-mentions is set to false" do
+    it "should not replace the @TestUser with the link to @TestUser" do
+      expect(disabled_mentioning_page.output).not_to include(result)
+    end
+
+    it "should leave other pages in the site alone and mention as normal" do
+      expect(index_page.output).to include(result)
+    end
+  end
+
+  context "when the jekyll-mentions is overridden on a single file" do
+    let(:custom_url_result) do
+      "<a href=\"https://custom-url.com/TestUser\" class=\"user-mention\">@TestUser</a>"
+    end
+
+    context "when overriden in pattern 'jekyll-mentions: custom_url'" do
+      it "should replace the mentions with the link in that specific file" do
+        expect(custom_url_01.output).to include(custom_url_result)
+      end
+
+      it "should not include the default URL" do
+        expect(custom_url_01.output).not_to include(result)
+      end
+
+      it "should leave other pages in the site alone and mention as normal" do
+        expect(index_page.output).to include(result)
+      end
+    end
+
+    context "when overriden in pattern 'jekyll-mentions.base_url: custom_url'" do
+      it "should replace the mentions with the link in that specific file" do
+        expect(custom_url_02.output).to include(custom_url_result)
+      end
+
+      it "should not include the default URL" do
+        expect(custom_url_02.output).not_to include(result)
+      end
+
+      it "should leave other pages in the site alone and mention as normal" do
+        expect(index_page.output).to include(result)
+      end
+    end
   end
 
   context "with non-word characters" do
@@ -130,8 +179,27 @@ RSpec.describe(Jekyll::Mentions) do
       expect(mentions.mention_base(site.config)).to eql(mentions_src)
     end
 
-    it "respects the new base when mentionsfying" do
+    it "respects the new base when mentionifying" do
       expect(basic_post.output).to start_with(para(result.sub(default_src, mentions_src)))
+    end
+  end
+
+  context "when the different base is defined in the front matter of the doc" do
+    let(:mentions_src) { "https://twitter.com" }
+    let(:doc_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => mentions_src },
+      }
+    end
+    let(:config_overrides) do
+      {
+        "jekyll-mentions" => { "base_url" => default_src },
+      }
+    end
+
+    it "fetches the custom base from the config" do
+      effective_overrides = site.config.merge(doc_overrides)
+      expect(mentions.mention_base(effective_overrides)).to eql(mentions_src)
     end
   end
 
