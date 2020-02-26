@@ -91,6 +91,10 @@ RSpec.describe(Jekyll::Mentions) do
     )
   end
 
+  it "works with HTML body tag markup across multiple lines" do
+    expect(find_by_title(site.pages, "Multi-line Body Tag").output).to include(para(result))
+  end
+
   context "when jekyll-mentions is set to false" do
     it "should not replace the @TestUser with the link to @TestUser" do
       expect(disabled_mentioning_page.output).not_to include(result)
