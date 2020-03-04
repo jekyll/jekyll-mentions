@@ -3,6 +3,7 @@
 ### Minor Enhancements
 
   * Allow configuring base URL in page front matter (#72)
+  * Incorporate document data only if it has override (#73)
 
 ### Bug Fixes
 
