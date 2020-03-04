@@ -18,7 +18,10 @@ module Jekyll
         content = doc.output
         return unless content.include?("@")
 
-        src = mention_base(doc.site.config.merge(doc.data || {}))
+        config = doc.site.config
+        config = config.merge(doc.data) if doc.data.key?("jekyll-mentions")
+
+        src = mention_base(config)
 
         if content.include? BODY_START_TAG
           head, opener, tail  = content.partition(OPENING_BODY_TAG_REGEX)
