@@ -1,9 +1,15 @@
-## HEAD
+## 1.6.0 / 2020-03-05
 
 ### Minor Enhancements
 
   * Allow configuring base URL in page front matter (#72)
   * Incorporate document data only if it has override (#73)
+
+### Development Fixes
+
+  * ci: test against Jekyll 4.0
+  * style: target Ruby 2.4
+  * ignore vendor/bundle
 
 ### Bug Fixes
 
