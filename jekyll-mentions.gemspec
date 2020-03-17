@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path("lib", __dir__)
-require("jekyll-mentions/version")
+require_relative "lib/jekyll-mentions/version"
 
 Gem::Specification.new do |s|
   s.name        = "jekyll-mentions"
