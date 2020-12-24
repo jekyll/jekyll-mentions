@@ -14,17 +14,17 @@ env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   matrix:
-  - JEKYLL_VERSION="~> 3.8"
+  - JEKYLL_VERSION="~> 3.9"
 
 matrix:
   include:
   # GitHub Pages
-  - rvm: 2.5.3
+  - rvm: 2.7.1
     env:
-    - JEKYLL_VERSION="~> 3.8.5"
+    - JEKYLL_VERSION="~> 3.9"
     - GITHUB_PAGES=1 # Only set on one build in matrix
   - rvm: *latest_ruby
-    env: JEKYLL_VERSION="~> 4.0"
+    env: JEKYLL_VERSION="~> 4.2"
 
 notifications:
   irc:
