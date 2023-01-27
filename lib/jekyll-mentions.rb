@@ -37,7 +37,7 @@ module Jekyll
           doc.output = filter_with_mention(src).call(content)[:output].to_s
         end
       end
-      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       # Public: Create or fetch the filter for the given {{src}} base URL.
       #
