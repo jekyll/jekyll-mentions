@@ -25,3 +25,7 @@ Naming/VariableNumber:
 Performance/ChainArrayAllocation:
   Exclude:
     - spec/**/*
+
+Layout/BlockAlignment:
+  Exclude:
+    - spec/**/*
