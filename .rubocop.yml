@@ -7,10 +7,21 @@ AllCops:
   Exclude:
     - vendor/**/*
 
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
 Layout/LineLength:
   Exclude:
     - spec/**/*
 
 Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Naming/VariableNumber:
+  Exclude:
+    - spec/**/*
+
+Performance/ChainArrayAllocation:
   Exclude:
     - spec/**/*
