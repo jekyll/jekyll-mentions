@@ -3,14 +3,29 @@ inherit_gem:
   rubocop-jekyll: .rubocop.yml
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Exclude:
     - vendor/**/*
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
 
 Layout/LineLength:
   Exclude:
     - spec/**/*
 
 Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Naming/VariableNumber:
+  Exclude:
+    - spec/**/*
+
+Performance/ChainArrayAllocation:
+  Exclude:
+    - spec/**/*
+
+Layout/BlockAlignment:
   Exclude:
     - spec/**/*
