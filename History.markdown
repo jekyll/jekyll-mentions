@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Bump actions/checkout from 3 to 4 (#84)
+
 ## 1.6.0 / 2020-03-05
 
 ### Minor Enhancements
