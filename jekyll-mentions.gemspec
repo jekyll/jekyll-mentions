@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 2.4.0"
 
-  s.add_dependency "html-pipeline", "~> 2.3"
+  s.add_dependency "html-pipeline", ">= 2.3", "< 4.0"
   s.add_dependency "jekyll", ">= 3.7", "< 5.0"
 
   s.add_development_dependency "bundler"
